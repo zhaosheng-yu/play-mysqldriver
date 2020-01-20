@@ -2,14 +2,14 @@ package main
 
 import (
 	"fmt"
-	"time"
-	"math/rand"
-	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"math/rand"
+	"time"
 )
 
 func main() {
-	for i:=0;i<155;i++ {
+	for i := 0; i < 155; i++ {
 		gorm.Open("mysql", "root:pfdsj@(127.0.0.1:3306)/test?charset=utf8mb4&parseTime=true&loc=Local")
 	}
 
@@ -21,10 +21,10 @@ func main() {
 
 	defer db.Close()
 
-	user := struct{
-		ID int
+	user := struct {
+		ID     int
 		Userid int
-		Name string
+		Name   string
 	}{}
 
 	err = db.Table("user").First(&user).Error
@@ -35,13 +35,13 @@ func main() {
 	//batch insert
 	num := 10
 	rand.Seed(time.Now().UnixNano())
-	for i:=0;i<num;i++ {
-		uid := rand.Intn(num*10)
-		name := fmt.Sprintf("user%d",uid)
-		user := struct{
+	for i := 0; i < num; i++ {
+		uid := rand.Intn(num * 10)
+		name := fmt.Sprintf("user%d", uid)
+		user := struct {
 			Userid int
-			Name string
-		}{uid,name}
+			Name   string
+		}{uid, name}
 		err = db.Table("user").Create(&user).Error
 		if err != nil {
 			fmt.Println("create error:%s", err)
@@ -51,25 +51,6 @@ func main() {
 
 	fmt.Println(user)
 
-	time.Sleep(time.Second*10)
+	time.Sleep(time.Second * 10)
 
 }
-test
-test
-test
-test
-test
-test
-test
-test
-test
-test
-test
-test
-test
-test
-test
-test
-test
-test
-test
